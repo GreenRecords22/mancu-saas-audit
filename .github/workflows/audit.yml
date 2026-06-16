@@ -10,9 +10,9 @@ jobs:
         with:
           node-version: '22'
       - name: Install Dependencies
-        run: |
-          npm install
-          npx playwright install chromium --with-deps
+        run: npm install
+      - name: Install Playwright
+        run: npx playwright install chromium --with-deps
       - name: Run Full Audit
         run: npx playwright test
         env:
