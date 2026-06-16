@@ -1,29 +1,21 @@
-name: 🧪 Mancu SaaS Full Audit
-on: [push, workflow_dispatch]
+name: 🚀 Mancu Full Audit
+on: [workflow_dispatch]
 jobs:
-  full-audit:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
       - name: Install dependencies
-        run: npm install
-      - name: Install Playwright
-        run: npx playwright install chromium
+        run: |
+          npm install
+          npx playwright install chromium
       - name: 🧪 Run Tests
         run: npx playwright test
         env:
-          CI: true
-          # Ye line fail hone se bachayegi
-          HEADLESS: true
-      - name: 📊 Upload Artifacts
+          HEADLESS: 1
+      - name: 📊 Upload Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: audit-report
-          path: |
-            test-results/
-            playwright-report/
+          name: report
+          path: playwright-report/
