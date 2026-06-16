@@ -9,17 +9,19 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm install
       - name: Install Playwright
-        run: npx playwright install chromium --with-deps
-      - name: Run Full Audit
+        run: npx playwright install chromium
+      - name: 🧪 Run Tests
         run: npx playwright test
         env:
           CI: true
-      - name: Upload Report
-        uses: actions/upload-artifact@v4
+          # Ye line fail hone se bachayegi
+          HEADLESS: true
+      - name: 📊 Upload Artifacts
         if: always()
+        uses: actions/upload-artifact@v4
         with:
           name: audit-report
           path: |
